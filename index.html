@@ -1,0 +1,124 @@
+// hokihoki_story.js
+const storyData = {
+
+  variables: {
+    Trust_Enaki: 0,
+    Trust_Tonni: 0,
+    Corruption: 0,
+    foundElepathyClue: false,
+    secretLab: false,
+    secretEnding: false
+  },
+
+  scenes: [
+
+    {
+      id: "prologue",
+      background: "hq_briefing_room.jpg",
+      dialogue: [
+        { speaker: "Enaki", text: "Welcome to the G.P.O. recruit program. We don’t have time for mistakes. Are you ready?" },
+        { speaker: "Kitana", text: "Keep up. Some of us don’t get second chances." },
+        { speaker: "Tonni", text: "Don’t worry, I’ll have your back… probably." }
+      ],
+      choices: [
+        { 
+          text: "Observe quietly", 
+          effects: { Trust_Enaki: +5, Corruption: +0 }, 
+          next: "chapter1" 
+        },
+        { 
+          text: "Talk to everyone", 
+          effects: { Trust_Tonni: +5, Corruption: +1 }, 
+          next: "chapter1" 
+        }
+      ]
+    },
+
+    {
+      id: "chapter1",
+      background: "abandoned_alley.jpg",
+      dialogue: [
+        { speaker: "Narrator", text: "You arrive at the reported ghoul activity area. Shadows shift in the alley." }
+      ],
+      choices: [
+        { 
+          text: "Fight the ghoul", 
+          effects: { Trust_Enaki: +5, Corruption: +2 }, 
+          next: "chapter2" 
+        },
+        { 
+          text: "Run and call for backup", 
+          effects: { Trust_Enaki: -2, Corruption: +0 }, 
+          next: "chapter2" 
+        },
+        { 
+          text: "Set a trap and observe", 
+          effects: { Trust_Tonni: +3, Corruption: +1, foundElepathyClue: true }, 
+          next: "chapter2" 
+        }
+      ]
+    },
+
+    {
+      id: "chapter2",
+      background: "monitoring_room.jpg",
+      dialogue: [
+        { speaker: "Enaki", text: "What is this signal? It’s… off the charts." },
+        { speaker: "Tonni", text: "Should we report it?" },
+        { speaker: "Kitana", text: "Do what you think is right, but fast." }
+      ],
+      choices: [
+        { 
+          text: "Report immediately", 
+          effects: { Trust_Enaki: +5, Corruption: +0 }, 
+          next: "chapter3" 
+        },
+        { 
+          text: "Investigate secretly", 
+          effects: { Trust_Tonni: +2, Corruption: +2, secretLab: true }, 
+          next: "chapter3" 
+        }
+      ]
+    },
+
+    {
+      id: "chapter3",
+      background: "gpo_corridor.jpg",
+      dialogue: [
+        { speaker: "Yosebi", text: "Do you… feel it too? The… pull?" },
+        { speaker: "Enaki", text: "Stay alert. This isn’t normal." }
+      ],
+      choices: [
+        { text: "Confront Yosebi", effects: { Trust_Enaki: +3, Corruption: +3 }, next: "chapter4" },
+        { text: "Avoid and observe", effects: { Trust_Tonni: +2, Corruption: +1 }, next: "chapter4" },
+        { text: "Follow Yosebi secretly", effects: { Corruption: +5, secretLab: true }, next: "chapter4" }
+      ]
+    },
+
+    {
+      id: "chapter4",
+      background: "rooftop_final.jpg",
+      dialogue: [
+        { speaker: "Narrator", text: "The final encounter with a corrupted ghoul entity begins under the full moon." }
+      ],
+      choices: [
+        { text: "Fight bravely", effects: { Trust_Enaki: +5, Corruption: +5 }, next: "ending" },
+        { text: "Sacrifice self to save teammates", effects: {}, next: "ending" },
+        { text: "Use Elepathy knowledge", effects: { secretEnding: true }, next: "ending" }
+      ]
+    },
+
+    {
+      id: "ending",
+      background: "ending_scene.jpg",
+      dialogue: [
+        { speaker: "Narrator", text: "The outcome of your mission is revealed based on your choices and variables." }
+      ],
+      choices: [] // End of story
+    }
+
+  ]
+
+};
+
+export default storyData;
